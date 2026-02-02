@@ -1,0 +1,23 @@
+# Automatic FTG takeover/blend parameters
+# mode: switch | blend
+mode: switch
+
+scan_topic: /scan
+enable_topic: /pp_enable
+
+pp_cmd_topic: /cmd_vel_auto
+ftg_cmd_topic: /cmd_vel_ftg_raw
+out_cmd_topic: /cmd_vel_safety
+
+# takeover thresholds (hysteresis)
+switch_dist_m: 0.90
+release_dist_m: 1.20
+front_fov_deg: 60
+
+# blend behavior
+stop_dist_m: 0.55
+min_speed_scale: 0.2
+
+# clamp angular to match your current safety limits
+max_steer_rad_s: 1.5
+rate_hz: 30

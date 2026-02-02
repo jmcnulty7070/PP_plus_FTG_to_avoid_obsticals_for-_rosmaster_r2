@@ -1,0 +1,21 @@
+# F1TENTH-style FTG controller tuning for ROSMASTER R2
+scan_topic: /scan
+out_topic: /cmd_vel_ftg_raw
+
+max_range_m: 6.0
+min_range_m: 0.05
+
+smoothing_window: 7
+bubble_radius_m: 0.35
+
+min_gap_width_pts: 8
+
+steer_gain: 1.2
+max_angular_z: 1.8
+
+max_speed: 0.7
+min_speed: 0.15
+slowdown_dist_m: 1.0
+stop_dist_m: 0.35
+
+forward_fov_deg: 70
