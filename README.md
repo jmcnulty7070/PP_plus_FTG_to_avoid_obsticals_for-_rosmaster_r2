@@ -1,4 +1,4 @@
-# ROSMASTER R2  
+# ROSMASTER R2 adding FTG to pure pursuit to use as f1tenth car 
 ## Pure Pursuit + Automatic FTG Obstacle Avoidance Continued from Pure Pursuit added Repo 
 ### (AMCL • Raceline • Safety Mux • Deadman Enabled)
 
