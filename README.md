@@ -92,12 +92,12 @@ roslaunch yahboomcar_nav laser_bringup.launch
 
 ### Terminal 2 — Localization (AMCL only)
 ```bash
-roslaunch r2_amcl_localization amcl_only.launch
+roslaunch r2_amcl_localization amcl_only.launch map:=/home/jestson/maps/home2.yaml
 ```
 
 ### Terminal 3 — Raceline Path
 ```bash
-roslaunch r2_raceline_pp raceline_to_path.launch raceline:=/home/jetson/paths/raceline.yaml
+roslaunch r2_raceline_pp raceline_to_path.launch raceline:=/home/jetson/paths/raceline_amcl_01.yaml
 ```
 
 ### Terminal 4 — Safety + FTG (AUTOMATIC)
@@ -107,7 +107,7 @@ roslaunch r2_estop_joy safety_mux_f1tenth.launch mode:=switch
 
 ### Terminal 5 — Pure Pursuit
 ```bash
-roslaunch r2_raceline_pp pure_pursuit.launch raceline:=/home/jetson/paths/raceline.yaml
+roslaunch r2_raceline_pp pure_pursuit.launch raceline:=/home/jetson/paths/raceline_amcl_01.yaml
 ```
 
 ---
