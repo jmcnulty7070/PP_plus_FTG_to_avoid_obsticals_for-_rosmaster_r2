@@ -1,5 +1,5 @@
 # ROSMASTER R2  
-## Pure Pursuit + Automatic FTG Obstacle Avoidance  
+## Pure Pursuit + Automatic FTG Obstacle Avoidance Continued from Pure Pursuit added Repo 
 ### (AMCL • Raceline • Safety Mux • Deadman Enabled)
 
 ---
