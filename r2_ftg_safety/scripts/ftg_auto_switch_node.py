@@ -35,6 +35,17 @@ def clamp(x, lo, hi):
     return lo if x < lo else hi if x > hi else x
 
 
+def is_finite(x):
+    """Python2.7-safe finiteness check for floats."""
+    if x is None:
+        return False
+    try:
+        # math.isnan / math.isinf exist in Python 2.7
+        return (not math.isnan(x)) and (not math.isinf(x))
+    except Exception:
+        return False
+
+
 class FtgAutoSwitch(object):
     def __init__(self):
         self.mode = rospy.get_param("~mode", "switch")  # 'switch' | 'blend'
@@ -87,30 +98,49 @@ class FtgAutoSwitch(object):
         self.ftg_cmd = msg
 
     def cb_scan(self, scan):
+        # Defensive: scan could be empty during startup
+        n = len(scan.ranges)
+        if n < 5:
+            self.front_min = None
+            self.active = True
+            return
+
+        # Compute indices covering a forward field of view around angle=0
         fov = math.radians(self.front_fov_deg) / 2.0
         inc = max(scan.angle_increment, 1e-6)
 
         def idx(angle):
             return int((angle - scan.angle_min) / inc)
 
-        i0 = max(0, idx(-fov))
-        i1 = min(len(scan.ranges) - 1, idx(fov))
+        i0 = idx(-fov)
+        i1 = idx(fov)
+
+        # Clamp bounds
+        i0 = max(0, min(n - 1, i0))
+        i1 = max(0, min(n - 1, i1))
+        if i1 < i0:
+            i0, i1 = i1, i0
+
+        # Find minimum valid range in that forward window
         m = None
-        for r in scan.ranges[i0:i1+1]:
-            if r is None:
+        for r in scan.ranges[i0:i1 + 1]:
+            if not is_finite(r):
                 continue
-            if math.isfinite(r) and r > 0.01:
-                m = r if m is None else min(m, r)
+            if r <= 0.01:
+                continue
+            m = r if m is None else min(m, r)
+
         self.front_min = m
 
         # hysteresis: switch on when too close, release when clear
         if self.front_min is None:
+            # If scan is invalid, be conservative: treat as active safety
             self.active = True
             return
 
-        if not self.active and self.front_min < self.switch_dist_m:
+        if (not self.active) and (self.front_min < self.switch_dist_m):
             self.active = True
-        elif self.active and self.front_min > self.release_dist_m:
+        elif self.active and (self.front_min > self.release_dist_m):
             self.active = False
 
     def blend_alpha(self, d):
@@ -138,6 +168,7 @@ class FtgAutoSwitch(object):
     def run(self):
         r = rospy.Rate(self.rate_hz)
         zero = Twist()
+
         while not rospy.is_shutdown():
             if not self.enabled:
                 # deadman not held -> publish zero safety
@@ -168,3 +199,4 @@ if __name__ == "__main__":
     rospy.init_node("ftg_auto_switch", anonymous=False)
     node = FtgAutoSwitch()
     node.run()
+
