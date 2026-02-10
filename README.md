@@ -92,7 +92,7 @@ roslaunch yahboomcar_nav laser_bringup.launch
 
 ### Terminal 2 — Localization (AMCL only)
 ```bash
-roslaunch r2_amcl_localization amcl_only.launch map:=/home/jestson/maps/home2.yaml
+roslaunch r2_amcl_localization amcl_only.launch map:=/home/jetson/maps/home2.yaml
 ```
 
 ### Terminal 3 — Raceline Path
