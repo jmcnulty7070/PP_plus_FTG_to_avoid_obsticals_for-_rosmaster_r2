@@ -4,17 +4,17 @@
   <node pkg="r2_raceline_pp" type="pure_pursuit_cmdvel.py" name="pure_pursuit" output="screen">
     <param name="path_yaml" value="$(arg raceline)"/>
     <param name="frame_id" value="map"/>
-    <param name="base_frame" value="base_link"/>
+    <param name="base_frame" value="base_footprint"/>
 
     <!-- IMPORTANT: publish RAW auto, gate passes it only when R2 is held -->
     <param name="out_topic" value="/cmd_vel_auto_raw"/>
 
     <!-- Conservative starting values -->
-    <param name="lookahead_m" value="1.2"/>
-    <param name="v_max" value="0.8"/>
-    <param name="v_min" value="0.4"/>
-    <param name="a_lat_max" value="1.2"/>
-    <param name="accel_limit" value="0.8"/>
+    <param name="lookahead_m" value=".55"/>
+    <param name="v_max" value="0.45"/>
+    <param name="v_min" value="0.18"/>
+    <param name="a_lat_max" value=".75"/>
+    <param name="accel_limit" value="0.6"/>
     <param name="rate_hz" value="30"/>
   </node>
 </launch>
