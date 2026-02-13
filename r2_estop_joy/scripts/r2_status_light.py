@@ -1,3 +1,15 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+import rospy
+from std_msgs.msg import Bool
+from geometry_msgs.msg import Twist
+
+# Qt via ROS python_qt_binding (works well on ROS Melodic)
+from python_qt_binding.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QFrame
+from python_qt_binding.QtCore import QTimer
+
+
 class StatusLight(QWidget):
     """
     Small status box:
