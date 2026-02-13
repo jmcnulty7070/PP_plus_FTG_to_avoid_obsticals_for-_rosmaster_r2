@@ -52,10 +52,10 @@ These parts are **locked and preserved**:
    - FTG stops publishing
    - `twist_mux` gives control back to Pure Pursuit
 7. status_light
-   Blue (FTG) relies on /ftg_auto_switch/active (we added that in the debug version).
-   Green (PP) uses /pp_enable + “recent /cmd_vel_auto”.
-   Yellow (Manual) watches /cmd_vel_teleop and only turns yellow if the command is nonzero recently.
-   Gray = nothing happening.
+  - Blue (FTG) relies on /ftg_auto_switch/active (we added that in the debug version).
+  - Green (PP) uses /pp_enable + “recent /cmd_vel_auto”.
+  - Yellow (Manual) watches /cmd_vel_teleop and only turns yellow if the command is nonzero recently.
+  - Gray = nothing happening.
 
 ---
 
