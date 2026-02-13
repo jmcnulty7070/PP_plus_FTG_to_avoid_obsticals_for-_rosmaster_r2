@@ -16,6 +16,7 @@ This setup adds **Follow-The-Gap (FTG)** so that:
 - Once clear → **Pure Pursuit automatically resumes**
 - You must **hold the enable button** (deadman) for motion
 - You can **E-STOP anytime**
+- Added Status Light program to show if PP, FTG or manual control
 
 You do **not** manually switch modes.  
 The system decides automatically and safely.
@@ -50,6 +51,13 @@ These parts are **locked and preserved**:
 6. Once the obstacle is gone:
    - FTG stops publishing
    - `twist_mux` gives control back to Pure Pursuit
+7. Blue (FTG) relies on /ftg_auto_switch/active (we added that in the debug version).
+
+   Green (PP) uses /pp_enable + “recent /cmd_vel_auto”.
+
+   Yellow (Manual) watches /cmd_vel_teleop and only turns yellow if the command is nonzero recently.
+
+   Gray = nothing happening.
 
 ---
 
@@ -114,6 +122,11 @@ roslaunch r2_raceline_pp pure_pursuit.launch raceline:=/home/jetson/paths/raceli
 ```bash
 roslaunch r2_raceline_pp amcl_raceline_rviz_fixed.launch
 ```
+### Terminal 7 — Status Light
+```bash
+rosrun r2_estop_joy r2_status_light.py
+```
+
 ---
 
 ## How to drive
