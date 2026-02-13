@@ -1,6 +1,15 @@
 Panels:
   - Class: rviz/Displays
     Name: Displays
+    Help Height: 0
+    Property Tree Widget:
+      Expanded:
+        - /Global Options
+        - /Map
+        - /Raceline Path
+        - /AMCL Pose (correct type)
+        - /AMCL Particles (red arrows)
+      Splitter Ratio: 0.20
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -67,6 +76,20 @@ Visualization Manager:
       Enabled: true
       Topic: /amcl_pose
 
+    # ✅ These are the “red arrows” (AMCL particles)
+    # AMCL publishes geometry_msgs/PoseArray on /particlecloud
+    - Name: AMCL Particles (red arrows)
+      Class: rviz/PoseArray
+      Enabled: true
+      Topic: /particlecloud
+      Shape: Arrow
+      Arrow Length: 0.30
+      Arrow Shaft Diameter: 0.04
+      Arrow Head Diameter: 0.08
+      Arrow Head Length: 0.10
+      Color: 255; 0; 0
+      Alpha: 0.9
+
     - Name: Raceline Path
       Class: rviz/Path
       Enabled: true
@@ -82,4 +105,3 @@ Views:
     Scale: 50
     X: 0
     Y: 0
-
