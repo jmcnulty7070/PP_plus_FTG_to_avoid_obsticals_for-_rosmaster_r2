@@ -110,6 +110,10 @@ roslaunch r2_estop_joy safety_mux_f1tenth.launch mode:=switch
 roslaunch r2_raceline_pp pure_pursuit.launch raceline:=/home/jetson/paths/raceline_amcl_01.yaml
 ```
 
+### Terminal 6 — RViz
+```bash
+roslaunch r2_raceline_pp amcl_raceline_rviz_fixed.launch
+```
 ---
 
 ## How to drive
